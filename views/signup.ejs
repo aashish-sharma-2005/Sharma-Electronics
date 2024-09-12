@@ -32,7 +32,9 @@
                 <input type="password" id="password" name="password" placeholder="Enter your password">
                 <span class="error" id="er4"></span>
 
-                
+                <!-- Add reCAPTCHA -->
+                <div class="g-recaptcha" data-sitekey="your-site-key"></div>
+                <span class="error" id="er5"></span>
 
                 <button type="submit">Sign up</button>
             </form>
@@ -47,6 +49,7 @@
 
 <script>
     function validateForm(event) {
+        // Prevent form from submitting initially
         event.preventDefault();
 
         const name = document.getElementById('name').value;
@@ -97,7 +100,15 @@
             document.getElementById('er4').innerHTML = "";
         }
 
-        
+        // reCAPTCHA validation
+        if (recaptchaResponse === '') {
+            document.getElementById('er5').style.display = 'inline';
+            document.getElementById('er5').innerHTML = "Please complete the reCAPTCHA";
+            hasError = true;
+        } else {
+            document.getElementById('er5').style.display = 'none';
+            document.getElementById('er5').innerHTML = "";
+        }
 
         // If no errors, submit the form
         if (!hasError) {
