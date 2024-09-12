@@ -32,9 +32,7 @@
                 <input type="password" id="password" name="password" placeholder="Enter your password">
                 <span class="error" id="er4"></span>
 
-                <!-- reCAPTCHA box -->
-                <div class="g-recaptcha" data-sitekey="6LevazoqAAAAAB5V5xU0y6Ho2J0uJh3QXXhvTob1"></div>
-                <span class="error" id="recaptcha-error"></span>
+                
 
                 <button type="submit">Sign up</button>
             </form>
@@ -99,15 +97,7 @@
             document.getElementById('er4').innerHTML = "";
         }
 
-        // reCAPTCHA validation
-        if (recaptchaResponse === '') {
-            document.getElementById('recaptcha-error').style.display = 'inline';
-            document.getElementById('recaptcha-error').innerHTML = "Please complete the reCAPTCHA";
-            hasError = true;
-        } else {
-            document.getElementById('recaptcha-error').style.display = 'none';
-            document.getElementById('recaptcha-error').innerHTML = "";
-        }
+        
 
         // If no errors, submit the form
         if (!hasError) {
