@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up - Sharma Electronics</title>
     <link rel="stylesheet" href="../css/signup.css">
-    <!-- Add reCAPTCHA script -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
     <div class="navbar">
@@ -32,10 +30,6 @@
                 <input type="password" id="password" name="password" placeholder="Enter your password">
                 <span class="error" id="er4"></span>
 
-                <!-- Add reCAPTCHA -->
-                <div class="g-recaptcha" data-sitekey="your-site-key"></div>
-                <span class="error" id="er5"></span>
-
                 <button type="submit">Sign up</button>
             </form>
             <div class="login-redirect">
@@ -56,7 +50,6 @@
         const address = document.getElementById('address').value;
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-        const recaptchaResponse = grecaptcha.getResponse();
 
         let hasError = false;
 
@@ -98,16 +91,6 @@
         } else {
             document.getElementById('er4').style.display = 'none';
             document.getElementById('er4').innerHTML = "";
-        }
-
-        // reCAPTCHA validation
-        if (recaptchaResponse === '') {
-            document.getElementById('er5').style.display = 'inline';
-            document.getElementById('er5').innerHTML = "Please complete the reCAPTCHA";
-            hasError = true;
-        } else {
-            document.getElementById('er5').style.display = 'none';
-            document.getElementById('er5').innerHTML = "";
         }
 
         // If no errors, submit the form
