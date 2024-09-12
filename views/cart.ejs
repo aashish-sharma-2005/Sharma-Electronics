@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="../css/cart.css">
+    <style>
+        /* Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: #0066cc;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-right: 1rem;
+            font-size: 1rem;
+        }
+
+        .navbar .website-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: auto;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Table Styling */
+        table {
+            width: 90%;
+            margin: 2rem auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        table, tr {
+            border: 1px solid rgb(0, 0, 0);
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #0066cc;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Image Styling */
+        .buy_img img {
+            height: 130px;
+            border-radius: 8px;
+        }
+
+        /* Button Styling */
+        button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+            color: #fff;
+        }
+
+        .btn-delete button {
+            background-color: #ff4d4d;
+            color: white;
+        }
+
+        .btn-shop button {
+            background-color: #28a745;
+            color: white;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            table {
+                width: 100%;
+            }
+
+            th, td {
+                padding: 0.5rem;
+            }
+
+            .buy_img img {
+                max-width: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="nav-links" style="width: 100%; display: flex; justify-content: space-between;">
+            <a href="/home" style="margin-left: 0;">Go Home</a>
+            <div class="website-name" style="position: absolute; left: 50%; transform: translateX(-50%);">My Electronics Store</div>
+        </div>
+    </div>
+
+    
+
+    <!-- Shopping Cart Table -->
+    <table>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th style="width: 7%;">Price</th>
+            <th>Description</th>
+            <th>Options</th>
+        </tr>
+        <% data.forEach(item => { %>
+        <tr>
+            <td class="buy_img">
+                <img src="../images/<%= item.img %>" alt="<%= item.name %>">
+            </td>
+            <td><%= item.name %></td>
+            <td><%= item.price %></td>
+            <td><%= item.description %></td>
+            <td>
+                <a href="/deletecart/<%= item.id %>" class="btn-delete">
+                    <button>Delete</button>
+                </a>
+                <a href="/buy/<%= item.id %>" class="btn-shop">
+                    <button>Shop Now</button>
+                </a>
+            </td>
+        </tr>
+        <% }) %>
+    </table>
+
+</body>
+
+</html>

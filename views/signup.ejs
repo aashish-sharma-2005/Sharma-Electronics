@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Sharma Electronics</title>
+    <link rel="stylesheet" href="../css/signup.css">
+    <!-- Add reCAPTCHA script -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Sharma Electronics</div>
+    </div>
+    <div class="container">
+        <div class="form-container">
+            <form id="signup-form" onsubmit="validateForm(event)" action="/signup" method="post">
+                <h2>Sign Up</h2>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name">
+                <span class="error" id="er1"></span>
+
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" placeholder="Enter your address">
+                <span class="error" id="er2"></span>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email">
+                <span class="error" id="er3"></span>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password">
+                <span class="error" id="er4"></span>
+
+                <!-- reCAPTCHA box -->
+                <div class="g-recaptcha" data-sitekey="6LevazoqAAAAAB5V5xU0y6Ho2J0uJh3QXXhvTob1"></div>
+                <span class="error" id="recaptcha-error"></span>
+
+                <button type="submit">Sign up</button>
+            </form>
+            <div class="login-redirect">
+                <p>Already have an account?</p>
+                <form action="/login" method="get">
+                    <button>Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<script>
+    function validateForm(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const address = document.getElementById('address').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const recaptchaResponse = grecaptcha.getResponse();
+
+        let hasError = false;
+
+        // Name validation
+        if (!name || name === '') {
+            document.getElementById('er1').style.display = 'inline';
+            document.getElementById('er1').innerHTML = "Please Enter Name";
+            hasError = true;
+        } else {
+            document.getElementById('er1').style.display = 'none';
+            document.getElementById('er1').innerHTML = "";
+        }
+
+        // Address validation
+        if (address === '') {
+            document.getElementById('er2').style.display = 'inline';
+            document.getElementById('er2').innerHTML = "Please Enter Address";
+            hasError = true;
+        } else {
+            document.getElementById('er2').style.display = 'none';
+            document.getElementById('er2').innerHTML = "";
+        }
+
+        // Email validation
+        if (email === '') {
+            document.getElementById('er3').style.display = 'inline';
+            document.getElementById('er3').innerHTML = "Please Enter Email";
+            hasError = true;
+        } else {
+            document.getElementById('er3').style.display = 'none';
+            document.getElementById('er3').innerHTML = "";
+        }
+
+        // Password validation
+        if (password === '') {
+            document.getElementById('er4').style.display = 'inline';
+            document.getElementById('er4').innerHTML = "Please Enter Password";
+            hasError = true;
+        } else {
+            document.getElementById('er4').style.display = 'none';
+            document.getElementById('er4').innerHTML = "";
+        }
+
+        // reCAPTCHA validation
+        if (recaptchaResponse === '') {
+            document.getElementById('recaptcha-error').style.display = 'inline';
+            document.getElementById('recaptcha-error').innerHTML = "Please complete the reCAPTCHA";
+            hasError = true;
+        } else {
+            document.getElementById('recaptcha-error').style.display = 'none';
+            document.getElementById('recaptcha-error').innerHTML = "";
+        }
+
+        // If no errors, submit the form
+        if (!hasError) {
+            document.getElementById('signup-form').submit();
+        }
+    }
+</script>
+</body>
+</html>

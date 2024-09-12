@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="../css/details.css">
+</head>
+<body>
+    <header>
+        <nav class="nav-container">
+            <a href="/home" class="home-link">
+                <img src="../images/home.png" alt="Home Icon" class="home-icon">Home
+            </a>
+            <h1 class="page-title">Product Details</h1>
+        </nav>
+    </header>
+        
+    <main>
+        <div class="product-container">
+            <% data.forEach(item => { %>
+            <div class="product-image">
+                <img src="../images/<%= item.img %>" alt="<%= item.name %>">
+            </div>
+            <div class="product-info">
+                <h2 class="product-name"><%= item.name %></h2>
+                <p class="product-price">₹ <%= item.price %> /- INR</p>
+                <p class="product-description"><b>Description:</b> <%= item.description %></p>
+                <div class="buy-buttons">
+                    <a href="/buy/<%= item.id %>" class="button buy-now">Buy Now</a>
+                    <a href="/cart/<%= item.id %>" class="button add-to-cart">Add To Cart</a>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+    </main>
+    
+    <script>
+        // JavaScript code if needed
+    </script>
+</body>
+</html>

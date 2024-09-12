@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Sharma Electronics</div>
+    </div>
+    
+    <div class="first">
+        <div class="login-options">
+            <label id="login">   
+                <input id="useracc" name="person" type="radio" value="user" onclick="toggleDiv('user')" checked> User
+                <input id="adminacc" name="person" type="radio" value="admin" onclick="toggleDiv('admin')"> Admin
+            </label>
+        </div>
+        
+        <form id="loginForm" onsubmit="submitForm(event)" action="/login" method="post" class="login-form">
+            <div id="adminForm" style="display:none;">
+                <h2>Admin Login</h2>
+                <label for="security_code">Security Code:</label>
+                <input type="text" name="admin" id="security_code" placeholder="Security Code" oninput="securitycode()">    <br><br>
+                <span id="securityer" style="display: none; color: red;">enter correct</span>
+            </div>
+            <div id="userForm">
+                <h2>User Login</h2>
+            </div>
+
+            <div class="shared-fields">
+                <label for="email">Email:</label>
+                <input class="input1" type="email" id="email" name="email" placeholder="Enter your email"> 
+                <span class="error" id="user_er1"></span><br><br>
+            
+                <label for="password">Password:</label>
+                <input class="input2" type="password" id="password" name="password" placeholder="Enter password"> 
+                <span class="error" id="user_er2"></span><br>
+            
+                <button type="submit" class="submit-button">Login</button>
+                <br><br>
+                <span>don't know password ? <a href="/forgot_email">forgot password</a></span>
+            </div>
+        </form>
+
+        <br><br>
+        <form action="/signup" method="get">
+            <button class="signup-button">Sign-up</button>
+        </form>
+    </div>
+
+    <script>
+        function securitycode() {
+            const code = document.getElementById('security_code').value;
+            const securityError = document.getElementById("securityer");
+            
+            console.log("Security code entered:", code); // Debug log
+    
+            if (code != 9466117431) {
+                securityError.style.display = 'block';
+                console.log("Security code is incorrect."); // Debug log
+                return false; // Return false to indicate the code is incorrect
+            } else {
+                securityError.style.display = 'none';
+                console.log("Security code is correct."); // Debug log
+                return true; // Return true to indicate the code is correct
+            }
+        }
+    
+        function toggleDiv(role) {
+            if (role === 'admin') {
+                document.getElementById('adminForm').style.display = 'block';
+                document.getElementById('userForm').style.display = 'none';
+            } else {
+                document.getElementById('adminForm').style.display = 'none';
+                document.getElementById('userForm').style.display = 'block';
+            }
+        }
+    
+        function submitForm(event) {
+            event.preventDefault(); // Prevent default form submission
+    
+            const emailField = document.getElementById('email');
+            const passwordField = document.getElementById('password');
+            const emailError = document.getElementById('user_er1');
+            const passwordError = document.getElementById('user_er2');
+            const person = document.querySelector('input[name="person"]:checked').value;
+    
+            console.log("Selected role:", person); // Debug log
+            
+            let hasError = false;
+    
+            // Email validation
+            if (emailField.value === '') {
+                emailError.style.display = 'inline';
+                emailError.innerHTML = "Please Enter Email";
+                hasError = true;
+            } else {
+                emailError.style.display = 'none';
+                emailError.innerHTML = "";
+            }
+    
+            // Password validation
+            if (passwordField.value === '') {
+                passwordError.style.display = 'inline';
+                passwordError.innerHTML = "Please Enter Password";
+                hasError = true;
+            } else {
+                passwordError.style.display = 'none';
+                passwordError.innerHTML = "";
+            }
+    
+            // If admin is selected, validate the security code
+            if (person === 'admin') {
+                const isCodeValid = securitycode();
+                if (!isCodeValid) {
+                    hasError = true; // Prevent submission if code is incorrect
+                }
+                console.log("Security code validation result:", isCodeValid); // Debug log
+            }
+    
+            if (!hasError) {
+                // Update the form's action URL with the selected role in the query string
+                const form = document.getElementById('loginForm');
+                form.action = `/login?person=${person}`;
+                
+                console.log("Form action set to:", form.action); // Debug log
+                
+                // Submit the form
+                form.submit();
+            }
+        }
+    
+        window.onload = function() {
+            toggleDiv('user'); // Ensure User Login form is shown by default
+        };
+    </script>
+    
+</body>
+</html>

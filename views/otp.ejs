@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <link rel="stylesheet" href="../css/otp.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <form action="/email-verification" method="post">
+            <h2>OTP Verification</h2>
+            <label for="otp">Enter OTP</label>:
+            <input class="input-field" type="text" id="otp" name="otp" placeholder="Enter OTP" required> <br><br>
+            <button class="verify-btn">Verify</button>
+            <!-- <button onclick=" return refresh()">Re-Enter Details</button> -->
+        </form>
+    </div>
+</body>
+</html>

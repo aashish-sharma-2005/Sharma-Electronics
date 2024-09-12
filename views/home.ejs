@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="refresh" content="">
+    <link rel="stylesheet" href="../css/home.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sharma's Electronics Store</title>
+    <script src="https://kit.fontawesome.com/3bc0b90751.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Sharma Electronics</div>
+        <div class="search-container">
+            <form action="/search" method="get">
+                <input type="text" class="search-input" name="product" placeholder="Search for products..."  required>
+                <button type="submit" class="search-button"><i class="fa-solid fa-search"></i></button>
+            </form>
+        </div>
+        <div class="user-info">
+            <span>User: </span><p class="user-name"><%= name %></p>
+        </div>
+        <a class="navcont1" href="/logout"><button>Logout</button></a>
+        <div class="cart">
+            <a style="text-decoration: none;" href="/cart"><span class="cart-icon">CART <i class="fa-solid fa-cart-shopping"></i></span></a>
+        </div>
+    </div>      
+
+    <div class="navadd">
+        <img class="add" src="../images/add.jpg.jpg" alt="hi">
+    </div>
+
+    <% 
+    // Group items by category
+    const groupedData = data.reduce((acc, item) => {
+        if (!acc[item.category]) {
+            acc[item.category] = [];
+        }
+        acc[item.category].push(item);
+        return acc;
+    }, {});
+    %>
+
+    <% Object.keys(groupedData).forEach(category => { %>
+        <div class="section-heading">
+            <h1><%= category %></h1>
+        </div>
+
+        <div class="row1">
+            <% groupedData[category].forEach(item => { %>
+            <div class="row1_1">
+                <img id="img_row1_1" src="../images/<%= item.img %>" alt="">
+                <div class="row1_text"><p class="decoraion row1_text"><%= item.name.substring(0, 22) %>..</p></div>
+                <p class="row1_text"><b>Price: </b> <%= item.price %>/- </p>
+                <a href="/home/<%= item.id %>"><button class="button_1">View Details</button></a>
+            </div>
+            <% }) %>
+        </div>
+    <% }) %>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4 class="last_f_a">Company</h4>
+                <ul>
+                    <li><a href="/aboutus">About Us</a></li>
+                    <li><a href="">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 class="last_f_a">Follow Us</h4>
+                <ul>
+                    <li><a href="/contact-us">Facebook</a></li>
+                    <li><a href="/contact-us">Twitter</a></li>
+                    <li><a href="/contact-us">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 YourCompanyName. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+</body>
+</html>

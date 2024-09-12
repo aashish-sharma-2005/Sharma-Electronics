@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="..//css/searchItem.css">
+</head>
+<body>
+    <% 
+    // Group items by category
+    const groupedData = data.reduce((acc, item) => {
+        if (!acc[item.category]) {
+            acc[item.category] = [];
+        }
+        acc[item.category].push(item);
+        return acc;
+    }, {});
+    %>
+
+    <% Object.keys(groupedData).forEach(category => { %>
+        <div class="section-heading">
+            <h1><%= category %></h1>
+        </div>
+
+        <div class="row1">
+            <% groupedData[category].forEach(item => { %>
+            <div class="row1_1">
+                <img id="img_row1_1" src="../images/<%= item.img %>" alt="">
+                <div class="row1_text"><p class="decoraion row1_text"><%= item.name.substring(0, 22) %>..</p></div>
+                <p class="row1_text"><b>Price: </b> <%= item.price %>/- </p>
+                <a href="/home/<%= item.id %>"><button class="button_1">View Details</button></a>
+            </div>
+            <% }) %>
+        </div>
+    <% }) %>
+</body>
+</html>

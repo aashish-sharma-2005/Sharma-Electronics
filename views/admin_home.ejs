@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="refresh" content="">
+    <link rel="stylesheet" href="..//css/admin_home.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sharma's Electronics Store</title>
+    <script src="https://kit.fontawesome.com/3bc0b90751.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Welcome "Aashish Sharma"</div>
+        <div class="cart">
+            <a style="margin-right: 10%;" class="navcont1" href="/logout">Logout</a>
+            <a style="text-decoration: none;color: black; margin-right: 0.5%;margin-left: 2%;" href="/addItem"><button>Add New Item</button></a>
+        </div>
+    </div>
+
+    <% 
+    // Group items by category
+    const groupedData = data.reduce((acc, item) => {
+        if (!acc[item.category]) {
+            acc[item.category] = [];
+        }
+        acc[item.category].push(item);
+        return acc;
+    }, {});
+    %>
+
+    <% Object.keys(groupedData).forEach(category => { %>
+        <div class="section-heading">
+            <h1><%= category %></h1>
+        </div>
+
+        <div class="row1">
+            <% groupedData[category].forEach(item => { %>
+            <div class="row1_1">
+                <img id="img_row1_1" src="../images/<%= item.img %>" alt="">
+                <div class="row1_text"><p class="decoraion row1_text"><%= item.name.substring(0, 22) %>..</p></div>
+                <p class="row1_text"><b>Price: </b> <%= item.price %>/- </p>
+                <a href="/detail/<%= item.id %>"><button class="button_1">View Details</button></a>
+                <a href="/deleteHome/<%= item.id %>"><button class="button_1">Remove</button></a>
+            </div>
+            <% }) %>
+        </div>
+    <% }) %>
+
+    <footer>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Sharma Electronic (Aashish Sharma)</p>
+        </div>
+    </footer>
+</body>
+</html>

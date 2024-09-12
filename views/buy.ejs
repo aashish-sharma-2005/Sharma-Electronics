@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="..//css/buy.css">
+</head>
+<body>
+    <% data.forEach(item => { %>
+    <table>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Quantit</th>
+        </tr>
+        <tr>
+            <td class="buy_img"><img class="buy_img" src="..//images/<%=item.img%>" alt="hi"></td>
+            <td style="padding-left: 6%;"><%= item.name %></td>
+            <td><input type="number" value="1" id="getquant" oninput="myfun('<%=item.price%>')"></td>
+        </tr>
+    </table>
+    <div class="last">
+        <form action="/payment<%=item.id%>" method="post">
+            <span>Total Price:<span ><input id="tot" type="text" name="totalPrice" value="<%=item.price%>" readonly></span></span>
+        <button type="submit">Proceed Payment</button>
+        </form> 
+    </div>
+    <% }) %>
+
+<script>
+    function myfun(price) {
+        let q = document.getElementById('getquant').value;
+        if(q!='' && q>0){
+            console.log(q);
+            console.log(price);
+            document.getElementById('tot').value = q * price;
+        }
+        else {
+            document.getElementById('tot').value = "";
+        }
+    }
+</script>
+</body>
+</html>
