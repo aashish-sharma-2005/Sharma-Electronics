@@ -5,6 +5,7 @@ var con = mysql.createConnection({
     user: "root",
     password: "",
     database: "project"
+    port: 3306;
 });
 
 con.connect(function(err){
